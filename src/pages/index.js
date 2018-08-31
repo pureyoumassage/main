@@ -1,63 +1,24 @@
 import React from 'react'
-import CardList from '../components/CardList'
-import Card from '../components/Card'
 import Container from '../components/Container'
 import PageTitle from '../components/PageTitle'
 import SEO from '../components/SEO'
 
-const Index = ({ data }) => {
-  const posts = data.allContentfulPost.edges
-
+const Index = () => {
   return (
     <div>
       <SEO />
       <Container>
         <PageTitle small>Pure You Massage</PageTitle>
-        <CardList>
-          {posts.map(({ node: post }) => (
-            <Card
-              key={post.id}
-              slug={post.slug}
-              image={post.heroImage}
-              title={post.title}
-              date={post.publishDate}
-              excerpt={post.body}
-            />
-          ))}
-        </CardList>
+        <h2>Write Content for here</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure at
+          placeat quo nostrum sunt consequuntur assumenda minus facilis rem cum
+          tenetur eligendi, totam maxime mollitia cupiditate optio, nam nisi
+          temporibus.
+        </p>
       </Container>
     </div>
   )
 }
-
-export const query = graphql`
-  query indexQuery {
-    allContentfulPost(
-      limit: 1000
-      sort: { fields: [publishDate], order: DESC }
-    ) {
-      edges {
-        node {
-          title
-          id
-          slug
-          publishDate(formatString: "MMMM DD, YYYY")
-          heroImage {
-            title
-            sizes(maxWidth: 1800) {
-              ...GatsbyContentfulSizes_withWebp_noBase64
-            }
-          }
-          body {
-            childMarkdownRemark {
-              html
-              excerpt(pruneLength: 80)
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 export default Index
